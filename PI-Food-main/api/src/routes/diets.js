@@ -1,17 +1,9 @@
 const { Router } = require('express');
 const {TypeDiet} = require ('../db');
-const {diets} = require ('../controller/Typediets.controller.js')
+const { getAllDiets } = require('../controller/controller');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-    diets.forEach(e=> {
-        TypeDiet.findOrCreate({
-            where: {name: e.name}
-        })
-    })
-    const allTypes = await TypeDiet.findAll();
-    res.send(allTypes.map(e => e.name))
-})
+router.get('/diets', getAllDiets);
 
 module.exports = router;

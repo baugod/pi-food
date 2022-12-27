@@ -4,6 +4,57 @@ const { getApiInfo, getDBinfo, getApiById, getDbById} = require ('./helpers')
 const {Sequelize} = require('sequelize');
 const { API_KEY } = process.env;
 dotenv.config();
+const {Diets} = require ('../controller/Typediets.controller.js')
+
+const getAllDiets = async (req, res, next) => {
+  try {
+     const dietas = Diets.map(e => {
+          return e.name
+     });
+      const dietTypes = await dietas.findAll();
+      res.send(dietas)
+  } catch (error) {
+      next(error)
+  }
+}
+
+const getForName = async (req, res, next) => {
+  try {
+      const { name } = req.query;
+      let allRecipes = await getAllRecipes()    
+      
+      if (name) {
+          let recipeByName = await allRecipes.filter(e => e.name.toLowerCase().includes(name.toString().toLowerCase()));
+         
+          if (recipeByName.length) {
+              let recipes = recipeByName.map(e => {
+                  return {
+                      image: e.image,
+                      name: e.name,
+                      dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.name),
+                      score: e.score,
+                      id: e.id
+                  }
+              })
+              return res.status(200).send(recipes); 
+          }  
+          return res.status(404).send('Sorry, recipe not found')
+      } else {
+          let recipes = allRecipes.map(e => {
+              return {
+                  image: e.image,
+                  name: e.name,
+                  dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.name),
+                  score: e.score,
+                  id: e.id
+              }
+          })
+          return res.status(200).send(recipes);
+      }
+  } catch {
+     return res.status(400).send('invalid input');
+  }
+};
 
 const getRecipeForId = async (req, res)=> {
   const {id} = req.params;
@@ -42,6 +93,8 @@ const getAllRecipes = async (req, res) => {
 }
 
  module.exports = {
+  getAllDiets,
+  getForName,
   getRecipeForId,
   getAllRecipes
  }
