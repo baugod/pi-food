@@ -1,25 +1,22 @@
-import './App.css';
-import {Route, BrowserRouter, Switch} from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import Home from './components/Home';
-import Form from './components/Form';
-import Detail from './components/Detail';
+//import './App.css';
+//import {Routes} from 'react'
+import {Route, BrowserRouter} from 'react-router-dom';
+import {LandingPage} from './components/LandingPage/LandingPage.jsx';
+//import Home from './components/Home/home';
+//import Form from './components/Form/';
+//import Detail from './components/Detail/';
+
+import "./App.css";
+//import SearchBar from "./components/SearchBar/SearchBar";
+
 
 function App() {
   return (
-  <BrowserRouter>
-  <div className='App'>
-    <Switch>
-      <Route>
-        <Route path="/" element={<LandingPage/>}/> 
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/create" element={<Form/>}/>
-        <Route path="/detail" element={<Detail/>}/>
-      </Route>
-    <Switch/>
-  </div>
-  </BrowserRouter>
-
+    <div className="App">
+      <BrowserRouter> 
+        <Route path= '/' component= {LandingPage}/>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -1,40 +1,32 @@
-.landing{
-    background-image: url('../icons/landing2.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;    
 }
 
-.wlc{
-    color: lightyellow;
+.welcomeMsg {
+    display: flex;
+    padding: 7px;
+    color: rgb(6, 6, 75);
     font-style: italic;
-    position:relative;
-    font-size: 115px;
-    background-color: rgb(123, 184, 123);
+    font-weight: 700;    
+    text-shadow: 6px 4px 5px rgba(0,0,0,0.43);
 }
 
-.btn {
+.homeButton {
+    color: rgb(231, 218, 218);
+    background-color: #ce5249;
+    font-size: 17px;
+    text-align: center;
+    padding: 10px 25px;
+    margin: 15px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px 1px rgb(112, 44, 44);
     cursor: pointer;
-    background: #56c79a;
-   
-  
-    
-    border-radius: 15px;
-    font-style: italic;
+}
 
-    color: #ffffff;
-    font-size: 23px;
-    padding: 9px 23px 9px 23px;
-    text-decoration: none;
-    position:relative;
-    margin-top: 5%;
-  }
-  
-  .btn:hover {
-    text-decoration: none;
-  }
+.homeButton:hover {
+    color:#ce5249;
+    background-color: rgb(231, 218, 218);
+}
