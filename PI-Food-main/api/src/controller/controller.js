@@ -4,24 +4,21 @@ const { getApiInfo, getDBinfo, getApiById, getDbById} = require ('./helpers')
 const {Sequelize} = require('sequelize');
 const { API_KEY } = process.env;
 dotenv.config();
-const {Diets} = require ('../controller/Typediets.controller.js')
+const {TypeDiet} = require ("../db.js");
 
-const getAllDiets = async (req, res, next) => {
+const getAllDiets = async (req, res) => {
   try {
-     const dietas = Diets.map(e => {
-          return e.name
-     });
-      const dietTypes = await dietas.findAll();
+     const dietas = await TypeDiet.findAll();
+      //const dietTypes = await dietas.findAll();
       res.send(dietas)
   } catch (error) {
-      next(error)
-  }
+  } return res.status(500).json(error.message);
 }
 
 const getForName = async (req, res, next) => {
   try {
       const { name } = req.query;
-      let allRecipes = await getAllRecipes()    
+     // let allRecipes = await getAllRecipes()    
       
       if (name) {
           let recipeByName = await allRecipes.filter(e => e.name.toLowerCase().includes(name.toString().toLowerCase()));
@@ -58,7 +55,7 @@ const getForName = async (req, res, next) => {
 
 const getRecipeForId = async (req, res)=> {
   const {id} = req.params;
-  const allRecipes = await getAllRecipes();
+ // const allRecipes = await getAllRecipes();
   let validator = id.includes("-");
 
   if(validator){

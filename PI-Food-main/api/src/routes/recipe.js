@@ -3,37 +3,41 @@ const{Recipe,TypeDiet} = require('../db')
 
 const router = Router();
 
-router.post('/', async (req,res,next) => {
-    let {
-        title,
+router.post('/', async (req, res) => {
+    let{
+        name,
         summary,
-        spoonacularScore,
+        score,
         healthScore,
-        analyzedInstructions,
-        createdInDb,
-        typeDiets
-    } = req.body;
-    if(!title || !summary) {
-        return res.status(400).send('Please, insert a title and a summary to continue!');
+        image,
+        steps,
+        diets
+    } = req.body
+
+    try{
+        let recipeCreate = await Recipe.create({ 
+            name,
+            summary,
+            score,
+            healthScore,
+            image,
+            steps,
+        })
+
+        let dietDB = await Diet.findAll({ 
+            where: {name: diets}
+        })
+
+        if (!name) return res.status(400).send({error: 'Debe ingresar el name para la receta'});
+        if (!summary) return res.status(400).send({error: 'Debe ingresar un summary de la receta'});
+        // console.log(recipeCreate);
+        // console.log(dietDB);
+        
+        recipeCreate.addDiet(dietDB);
+        res.send('Succesfull');
+
+    }catch(error){
+        res.status(400).send(error);
     }
-   // console.log(title);
-try{let createRecipe = await Recipe.create({
-       // id,     
-        title,
-        summary,
-        spoonacularScore ,
-        healthScore,
-        analyzedInstructions,
-       // typeDiet,
-        createdInDb
 })
-let dietTypeDb = await TypeDiet.findAll({ where:{ name:typeDiets } })
-    createRecipe.addTypeDiet(dietTypeDb)
-    res.status(200).send('receta creada')   
-
-}catch(e){
-    next(e)
-}
-});
-
 module.exports= router;
