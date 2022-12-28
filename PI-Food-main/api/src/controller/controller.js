@@ -10,11 +10,11 @@ const getAllDiets = async (req, res) => {
   try {
      const dietas = await TypeDiet.findAll();
       //const dietTypes = await dietas.findAll();
-      res.send(dietas)
+      return res.status(200).json(dietas)
   } catch (error) {
-  } return res.status(500).json(error.message);
+   return res.status(500).json(error.message);
+ }
 }
-
 const getForName = async (req, res, next) => {
   try {
       const { name } = req.query;

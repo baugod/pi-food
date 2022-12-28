@@ -4,6 +4,6 @@ const { getAllDiets } = require('../controller/controller');
 
 const router = Router();
 
-router.get('/diets', getAllDiets);
+router.get('/', getAllDiets);
 
 module.exports = router;

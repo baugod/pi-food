@@ -5,39 +5,32 @@ const router = Router();
 
 router.post('/', async (req, res) => {
     let{
-        name,
+        title,
         summary,
-        score,
+        spoonacularScore,
         healthScore,
-        image,
-        steps,
-        diets
+        analyzedInstructions,
+        createdInDb
     } = req.body
-
+    if(!title || !summary) return res.status(400).send('Please, insert Title and Summary to continue!');
     try{
         let recipeCreate = await Recipe.create({ 
-            name,
+            title,
             summary,
-            score,
+            spoonacularScore,
             healthScore,
-            image,
-            steps,
+            analyzedInstructions,
+            createdInDb,
+          //  typeDiets
         })
 
-        let dietDB = await Diet.findAll({ 
-            where: {name: diets}
-        })
-
-        if (!name) return res.status(400).send({error: 'Debe ingresar el name para la receta'});
-        if (!summary) return res.status(400).send({error: 'Debe ingresar un summary de la receta'});
+       // let dietTypeDB = await TypeDiet.findAll({ where: {name: diets} });
+       // recipeCreate.addTypeDiet(dietTypeDB);
+        res.status(200).send('Recipe created!')
         // console.log(recipeCreate);
         // console.log(dietDB);
-        
-        recipeCreate.addDiet(dietDB);
-        res.send('Succesfull');
-
     }catch(error){
-        res.status(400).send(error);
+        return res.status(500).json(error.message);
     }
 })
 module.exports= router;
