@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './landingPage.css';
 
-
-export function LandingPage() {
+export function LandingPage(){
     return (
-        <div className="landing">
-            <h1 className="welcomeMsg">Estas preparado para la cocina?</h1>
-            <Link to='/home' id="click">
-                <button className="homeButton">A COCINAR!!</button>
+        <div className = "landing">
+        
+            <h1 className="wlc">Bienvenidos a las Recetas de Bauti!</h1>
+            <Link to= '/home'> 
+            <button className="btn">A COCINAR!!</button>
             </Link>
-
         </div>
-    );
-    }
+    )
+}

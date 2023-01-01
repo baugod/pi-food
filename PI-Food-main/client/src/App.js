@@ -1,22 +1,27 @@
-//import './App.css';
-//import {Routes} from 'react'
-import {Route, BrowserRouter} from 'react-router-dom';
+import './App.css';
+import React from 'react'
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import {LandingPage} from './components/LandingPage/LandingPage.jsx';
 //import Home from './components/Home/home';
 //import Form from './components/Form/';
 //import Detail from './components/Detail/';
 
-import "./App.css";
 //import SearchBar from "./components/SearchBar/SearchBar";
 
 
 function App() {
   return (
-    <div className="App">
       <BrowserRouter> 
-        <Route path= '/' component= {LandingPage}/>
-      </BrowserRouter>
+    <div className="App">
+      <Routes>
+        {/* <NavBar/> */}
+          <Route path= '/' component= {<LandingPage/>}/>
+          {/* <Route path= '/Home' component= {Home}/> */}
+          {/* <Route path= '/Form' component= {<Form/>}/>
+          <Route path= '/Detail' component= {<Detail/>}/> */}
+      </Routes>
     </div>
+      </BrowserRouter>
   );
 }
 
