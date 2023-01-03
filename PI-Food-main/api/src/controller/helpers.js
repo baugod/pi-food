@@ -6,7 +6,7 @@ const dotenv = require ('dotenv');
 dotenv.config();
 
 const getApiInfo = async () => {
-    //const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=$99302a2c1b3d482f94b078495686de33&number=100&addRecipeInformation=true`)
+//const apiUrl = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`)
     const apiUrl = await axios.get('https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5')
     const apiInfo = await apiUrl.data.results.map(e =>{
      // console.log(apiUrl.data.result)
@@ -40,8 +40,8 @@ const getDBinfo = async () => {
 };
 
 const getApiById = async (id) => {
-  return await axios.get('https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5')
-  //`https://api.spoonacular.com/recipes/${id}/information?${API_KEY}`
+  //return await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+    return await axios.get('https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5')
 };
 
 const getDbById = async (id) => {
