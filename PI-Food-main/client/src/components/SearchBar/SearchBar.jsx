@@ -1,30 +1,38 @@
-import React from 'react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getRecipesByName } from '../actions/actions';
-//import './searchbar.css';
+import { useDispatch } from "react-redux";
+import {byNameApi} from "../../Redux/petitionsApi"
+import style from "./search.css";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-export default function SearchBar() {
-    const dispatch = useDispatch();
-    const [input, setInput] = useState('');
-
-    function handleChange(e) {    
-        e.preventDefault();    
-        setInput(e.target.value);
-    };
-
-    function handleSubmit(e) {
-        try {
-            dispatch(getRecipesByName(input));  
-        } catch (error) {            
-            return error;
-        }
-        setInput('')
-    };
-    return (
-        <div className="search">
-            <input type="text" className="searchInput" placeholder="Search recipe by name" value={input} onChange={e => handleChange(e)}/>
-            <button className="searchButton" type="submit" onClick={e => handleSubmit(e)}>Search</button>
-        </div>
-           )
-};
+export default function SearchBard() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [input, SetInput] = useState();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    byNameApi(dispatch, input).catch((err) => {
+      swal({
+        title: "Error!",
+        text: `${err.response.data}`,
+        icon: "error",
+        button: "OK",
+      });
+    });
+  };
+  const handleChange = (e) => {
+    SetInput(e.target.value);
+   // apiAllbyname(dispatch, e.target.value);
+  };
+  return (
+    <form className={style.form} onSubmit={handleSubmit}>
+      <input
+        type="text"
+        id="title"
+        className={style.Bar}
+        onChange={handleChange}
+        placeholder="Search Recipe"
+      />
+    </form>
+  );
+}

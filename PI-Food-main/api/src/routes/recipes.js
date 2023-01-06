@@ -5,7 +5,7 @@ const {Recipe, Typediet} = require ('../db');
 
 const router = Router();
 
-router.get ('/', getAllRecipes);
+router.get ('/recipes', getAllRecipes);
 
 router.get('/:id', getRecipeForId);
 

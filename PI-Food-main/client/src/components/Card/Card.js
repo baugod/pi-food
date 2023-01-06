@@ -1,13 +1,27 @@
-import React from "react";
-import './Card.module.css'
-export default function Card ({title , img , typeDiets ,  id})
-   
-return (
-    <div key = {id} className="card">
-        <div className="cd">
-        <h3>{title}</h3>
-        <img  className="cardimg" src = { img? img:'https://image.freepik.com/foto-gratis/tabla-picar-rodeada-verduras-huevos-granos-arroz-escritorio_23-2148062361.jpg' } alt ='img not found' width='200px'  height='250px'/>
-        <div className="tipes">  {typeDiets.map(t => <h5> {t.name}</h5>)}  </div> 
-        </div>
-    </div>
-)
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './CardStyle.jsx'
+
+export default function Card({id, title, image, diets}) {
+	const getDiets = function () {
+		let arrayDiets = [];
+		if (diets) {
+			for(let diet of diets) {
+				typeof diet === 'object' ? arrayDiets.push(diet.name) : arrayDiets.push(diet);
+			}
+		}
+		return arrayDiets.length ? arrayDiets.join(', ') : 'Diets Not Found!'
+	}
+	return (
+		<React.Fragment>
+			<Link to={`/recipes/${id}`} className='card'>
+				<div className='img-recipe'>
+					<img src={image || 'https://media.giphy.com/media/lGbz7CsaCj4Tm/giphy.gif'} alt={title}/>
+				</div>
+					<div className='card-info'>
+	                	<h2 className='card-title'>{title}</h2>
+						<h4 className='card-diets'>{getDiets()}</h4>
+					</div>
+			</Link>
+    	</React.Fragment>
+)}

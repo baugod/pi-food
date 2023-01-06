@@ -1,114 +1,30 @@
-.bkg {
-  /* background-image: url('../fondo/imagenespi.jpegs'); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  /* display: flex; */
-  /* flex-direction: column; */
-}
-
-.select {
-  background: rgb(186, 216, 156);
-  cursor: pointer;
-  display: inline-block;
-  justify-content: center;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  border-style: groove;
-}
-
-.cards {
+.container{
+  width: 100%;
   display: grid;
-  /* align-items:center; */
-  /* padding: 30px; */
-  justify-content: center;
-  grid-template-columns: 25% 25% 25% 25%;
-  gap: 20px;
+  grid-template-columns: 30% 70%;
+  margin-top: 16vh;
 }
 
-.paginado {
+.filter{
   display: flex;
-  flex-direction: row;
   justify-content: center;
-
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
-.filterC {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  justify-content: space-evenly;
-
+@media (max-width: 1000px) {
+  .container{
+      display: block;
+  }
+  .filter{
+      display: grid;
+      grid-template-columns: 50% 50%;
+  }
 }
 
-.refresh {
-  -webkit-border-radius: 10;
-  -moz-border-radius: 10;
-  border-radius: 10px;
-  font-family: italic;
-  color: #000000;
-  font-size: 14px;
-  background: rgb(193, 215, 233);
-  padding: 3px 13px 3px 13px;
-  text-decoration: none;
-
-}
-
-.input {
-  background-color: #e6d57e;
-}
-
-.create {
-  -webkit-border-radius: 10;
-  -moz-border-radius: 10;
-  border-radius: 10px;
-  font-family: italic;
-  color: #000000;
-  font-size: 14px;
-  background: rgb(193, 228, 187);
-  padding: 3px 13px 3px 13px;
-  text-decoration: none;
-}
-
-.search {
-  display: flex;
-  justify-content: start;
-  margin-left: 50px;
-  margin-bottom: 25px;
-  margin-top: 15px;
-}
-
-.btnsearch {
-  -webkit-border-radius: 10;
-  -moz-border-radius: 10;
-  border-radius: 10px;
-  font-family: italic;
-  color: #000000;
-  font-size: 14px;
-  background: #e6d57e;
-  padding: 3px 13px 3px 13px;
-  text-decoration: none;
-}
-
-.btnsearch:hover {
-  background: #d8e66c;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.create:hover {
-  background: #d8e66c;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.refresh:hover {
-  background: #d8e66c;
-  text-decoration: none;
-  cursor: pointer;
+@media (max-width: 430px) {
+  .filter{
+      display: flex;
+      justify-content: center;
+  }
 }
