@@ -5,9 +5,18 @@ const {Sequelize} = require('sequelize');
 const { API_KEY } = process.env;
 dotenv.config();
 const {TypeDiet} = require ("../db.js");
+const db = require('../db.js');
+
+const getAllRecipes = async (req, res) => {
+ const apiInfo = await getApiInfo();
+ const dbInfo = await getDBinfo();
+ //const allInfo = apiInfo.concat(dbInfo);
+
+ return res.status(200).json(apiInfo);
+}
 
 const getAllDiets = async (req, res) => {
-  try {
+    try {
      const dietas = await TypeDiet.findAll();
       //const dietTypes = await dietas.findAll();
       return res.status(200).json(dietas)
@@ -22,7 +31,7 @@ const getForName = async (req, res, next) => {
       
       if (name) {
           let recipeByName = await allRecipes.filter(e => e.name.toLowerCase().includes(name.toString().toLowerCase()));
-         
+    
           if (recipeByName.length) {
               let recipes = recipeByName.map(e => {
                   return {
@@ -40,7 +49,7 @@ const getForName = async (req, res, next) => {
           let recipes = allRecipes.map(e => {
               return {
                   image: e.image,
-                  name: e.name,
+                  title: e.title,
                   dietTypes: e.dietTypes ? e.dietTypes : e.diets.map(e => e.name),
                   score: e.score,
                   id: e.id
@@ -55,22 +64,12 @@ const getForName = async (req, res, next) => {
 
 const getRecipeForId = async (req, res)=> {
   const {id} = req.params;
- // const allRecipes = await getAllRecipes();
- // let validator = id.includes("-");
- const apiInfo = await getApiInfo();
- const dbInfo = await getDBinfo();
- const allInfo = apiInfo.concat(dbInfo);
- let recipeId = await allInfo.find((e)=> e.id == id);
- return res.status(200).json(recipeId);
+ const apiId = await getApiById();
+ console.log(apiId);
+ //const dbId = await getDbById();
+ //const allInfo = apiId.concat(dbId);
+ return res.status(200).json(apiId);
 };
-
-const getAllRecipes = async (req, res) => {
- const apiInfo = await getApiInfo();
- const dbInfo = await getDBinfo();
- const allInfo = apiInfo.concat(dbInfo);
-// console.log(dbInfo);
- return res.status(200).json(allInfo);
-}
 
  module.exports = {
   getAllDiets,

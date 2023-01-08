@@ -7,7 +7,7 @@ const router = Router();
 
 router.get ('/recipes', getAllRecipes);
 
-router.get('/:id', getRecipeForId);
+router.get('/recipes/:id', getRecipeForId);
 
 router.get('/recipes?name', getForName);
 

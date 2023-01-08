@@ -19,21 +19,7 @@ const recipeSlice = createSlice({
         getAllDiets(state, action){
             state.typeDiets = action.payload;
         },
-        filterById(state, action){
-            const filterId = state.allRecipes
-            const idFind = filterId.find((recipe) => {
-                if(typeof action.payload === 'number'){
-                    if(recipeIdApi === action.payload) return recipe
-                } else {
-                    if(recipe.id === action.payload) return recipe
-                }
-            });
-            return{ 
-                ...state,
-                detail:idFind
-            };
-        },
-        filterByTypeDiet(state, {payload}){
+        filterByTypeDiet(state, {action}){
             const recipesAll = state.allRecipes
 
             const filterByDiets = action.payload === 'Filter by type' ? 
@@ -82,19 +68,19 @@ const recipeSlice = createSlice({
 
             state.recipefilter = sortedName;
         },
-        sortByScore(state, action){
-            recipesByScore = action.payload === 'SSc'?state.allRecipes.sort((a,b) => {
-                if((a.score - b.score) < 0) return 1 
-                else return -1
-            }) : state.allRecipes.sort((a,b)=> {
-                if((a.healthScore - b.healthScore) < 0) return 1
-                else return -1
-            })
-            return {
-                ...state,
-                recipes: recipesByScore
-            }
-        },
+        // sortByScore(state, action){
+        //     recipesByScore = action.payload === 'SSc'?state.allRecipes.sort((a,b) => {
+        //         if((a.score - b.score) < 0) return 1 
+        //         else return -1
+        //     }) : state.allRecipes.sort((a,b)=> {
+        //         if((a.healthScore - b.healthScore) < 0) return 1
+        //         else return -1
+        //     })
+        //     return {
+        //         ...state,
+        //         recipes: recipesByScore
+        //     }
+        // },
         filterByOrder(state, action){
             const recipesByOrder = action.payload === 'up' ? state.allRecipes.sort((a, b) => {
                 if (a.name.toLowerCase() > b.name.toLowerCase()) return 1

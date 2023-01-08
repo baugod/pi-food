@@ -1,77 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRecipeDetails } from '../actions/actions';
-import Loading from '../../components/Loading/loading'
-import './Detail.css'
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {axios} from "../../Redux/axios.js";
+import Card from "../Card/Card.jsx";
+import swal from "swalalert";
 
-export default function Detail({
-	match: {
-		params: { id },
-	},
-}) {
-	const dispatch = useDispatch();
-	const recipe = useSelector((state) => state.recipeById);
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		dispatch(getRecipeDetails(id));
-		setTimeout(() => {
-			setLoading(false);
-		}, 2000);
-	}, [dispatch, id]);
+export default function Details() {
+	const {id} = useParams();
+	const [recipe, setRecipe] = useState(null);
+	const navigate = useNavigate();
+	useEffect(()=> {
+		axios.get(`/recipes/${id}`).then((e)=> setRecipe(e.data)).catch((err)=> {
+			console.clear();
+			swal({
+				title: "Error!",
+				text: `${err.response.data}`,
+				icon: "error",
+				button: "Volver al inicio"
+			}).then(()=>navigate("/home"));
+		})
+	}, [id]);
 
 	return (
-		<React.Fragment>
-			<div className='main-container'>
-				{loading ? (
+		<>
+		<div className={StyleSheet.conteiner}>
+			<div className={StyleSheet.details}>
+				<div className={style.columns}>
 					<div>
-						<img
-							className='loading'
-							alt='Loading'
-						/>
-					</div>
-				) : recipe.title ? (
-					<>
-						<h1 className='detail-title'>{recipe.title}</h1>
-						<div className='detail-container'>
-							<div className='left-container'>
-								<img src={recipe.image} alt=''/>
-								<div className='detail-points'>
-									<h1>
-										{recipe.score &&
-											`${recipe.score} Points`}
-									</h1>
-									<h1>
-										{recipe.healthScore &&
-											`${recipe.healthScore}%`}
-									</h1>
-									<h1>Healthy</h1>
-								</div>
-							</div>
-							<div className='right-container'>
-								<h2>{recipe.summary && 'Summary'}</h2>
-								<div className='detail-summary'>
-									<p
-										dangerouslySetInnerHTML={{
-											__html: recipe.summary,
-										}}
-									/>
-								</div>
-								<h2>{recipe.instructions && 'Instructions'}</h2>
-								<div className='detail-instructions'>
-									<p
-										dangerouslySetInnerHTML={{
-											__html: recipe.instructions,
-										}}
-									/>
-								</div>
-							</div>
+						<div className={style.listItem}>
+							<NavLink to="/home">Back</NavLink>
 						</div>
-					</>
-				) : (
-					<h1>Something went wrong, please try again!</h1>
-				)}
+						{recipe?<Card recipe= {Card}/> : <Loading/>}
+					</div>
+					<div className={style.columns}>
+						<h2 className={style.title}>{recipe?.title}</h2>
+						<p className={style.text}></p>
+					</div>	
+				</div>
 			</div>
-		</React.Fragment>
-	);
+		</div>
+		</>
+	)
 }

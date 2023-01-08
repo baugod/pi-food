@@ -12,6 +12,6 @@ conn.sync({ force: false }).then(() => {
     TypeDiet.create({name: e.name})
   })
   server.listen(3001, () => {
-    console.log('Listening at 3001'); // eslint-disable-line no-console
+    console.log('Listening at port 3001'); // eslint-disable-line no-console
   });
 });
