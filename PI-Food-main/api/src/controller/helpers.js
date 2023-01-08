@@ -24,7 +24,7 @@ const getDBinfo = async () => {
   return await Recipe.findAll({
     includes: {
       model: TypeDiet,
-      attributes: ['name'],
+      attributes: ['title'],
       through: {
         attributes: []
       }
@@ -32,43 +32,12 @@ const getDBinfo = async () => {
   });
 };
 
-
-
-
-async function getApiById(name) {
-  try {
-    let result = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true&number=100`
-    );
-    let resolve = [];
-    if (result.data) {
-      result.data.results.map((item) => {
-        let obj = RecipeFormater(
-          item.id,
-          item.title,
-          item.spoonacularScore,
-          item.image,
-          item.diets
-        );
-        resolve.push(obj);
-      });
-      return resolve;
-    } } catch (error) {
-      console.log("error in axios by name");
-    }
-  }
-
-
-
-
-
-
-
-
-// const getApiById = async (id) => {
-//   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.API_KEY}`)
-// };
-
+  const getApiById = async (id) => {
+    const recipes = await getApiInfo();
+    const recipesId = await recipes.find((d) => d.id == id);
+    return recipesId;
+  };
+  
 // const getDbById = async (id) => {
 //   return await Recipe.findByPk(id, {
 //     includes:{

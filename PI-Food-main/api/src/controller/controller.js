@@ -65,11 +65,16 @@ const getForName = async (req, res, next) => {
 const getRecipeForId = async (req, res)=> {
   const {id} = req.params;
  const apiId = await getApiById();
- console.log(apiId);
+try {
+    const recipeApi = await getApiById(id);
+if(!recipeApi) return res.status(404).send("Api not found");
+return res.status(200).json(recipeApi)
+} catch(err){ 
  //const dbId = await getDbById();
  //const allInfo = apiId.concat(dbId);
- return res.status(200).json(apiId);
-};
+ return res.status(500).send(err.message);
+
+}};
 
  module.exports = {
   getAllDiets,
