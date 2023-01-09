@@ -38,20 +38,20 @@ const getDBinfo = async () => {
     return recipesId;
   };
   
-// const getDbById = async (id) => {
-//   return await Recipe.findByPk(id, {
-//     includes:{
-//       model: TypeDiet,
-//       attributes: ['name'],
-//       through: {
-//         attributes: []
-//       } }
-//   });
-// }
+ const getDbById = async (id) => {
+   return await Recipe.findByPk(id, {
+     includes:{
+       model: TypeDiet,
+       attributes: ['name'],
+       through: {
+         attributes: []
+       } }
+   });
+ }
 
 module.exports = {
     getApiInfo,
     getDBinfo,
     getApiById,
-    //getDbById,
+    getDbById,
    }
