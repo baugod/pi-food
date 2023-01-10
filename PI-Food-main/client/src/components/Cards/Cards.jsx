@@ -1,39 +1,55 @@
 
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
+export function Recipes() {
+  const [recipes, setRecipes] = useState([]);
+  const [counter, setCounter] = useState(1);
 
-
-
-import'./CardsStyle.css';
-import { useEffect, useState } from 'react';
-import axios from "axios";
-
-export default function Cards() {
-const [recipes, setRecipes] = useState([]);
-
-useEffect(()=>{
+const downPage = () =>{
+    setCounter(counter - 1);
+}
+const upPage = ()=>{
+    setCounter(counter + 1);
+}
+  useEffect(() => {
+    const getRecipes = async () => {
+      try {
+        const recipe = await fetch("http://localhost:3001/recipes");
+        const data = await recipe.json();
+        if(counter === 1){
+          const aux = data.splice(0,9);
+          return setRecipes(aux);
+        }else{
+        const aux = data.splice(counter*10-10, counter*10-1)
+        return setRecipes(aux)
+        }
+      } catch (error) {
+        return error.message;
+      }
+    };
     getRecipes();
-},[])
+  }, [counter]);
 
- const getRecipes = async() => {
-    const recipe = await axios.get("http://localhost:3001/recipes");
-setRecipes(recipe.data);
-};
-return (
+  return (
+    <Link>
     <div>
-{recipes.map(r=>{
-    return(
-        <div>
+      {recipes.map((r) => {
+        return (
+          <div>
             <p key={r.id}>{r.title}</p>
-            <img src={r.image} alt={r.title}/>
-        </div>
-    )
-})}
+            <img src={r.image} alt={r.title} />
+          </div>
+        );
+      })}
+
+      <button onClick={downPage}>-</button>
+      <span>{counter}</span>
+      <button onClick={upPage}>+</button>
     </div>
-)}
-
-
-
-
+    </Link>
+  );
+}
 
 
 

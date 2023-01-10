@@ -9,6 +9,6 @@ router.get ('/recipes', getAllRecipes);
 
 router.get('/recipes/:id', getRecipeForId);
 
-router.get('/recipes?name=', getForName);
+router.get('/name=', getForName);
 
 module.exports = router;

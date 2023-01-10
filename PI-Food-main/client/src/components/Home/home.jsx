@@ -1,20 +1,19 @@
-import Cards from '../Cards/Cards';
+import {Recipes} from '../Cards/Cards';
 import React from 'react';
-import style from './homeStyle.css'
+//import style from './homeStyle.css'
 
 export default function Home(){
     return (
         <section>
-        {/* <div className={style.container}> */}
-            {/* <div className={style.filter}>
-                <Filter/>
-                <Sort/>  */}
-            {/* </div> */}
+                <h1>Recetas</h1>
             <div>
-                <Cards/> 
+            <button>Ordenar por:</button>
+            <button>Filtrar por:</button>
             </div>
-        {/* </div> */}
+            <div>
+            <Recipes />   
+            </div>
         </section>
-    );
+            )
 }
   

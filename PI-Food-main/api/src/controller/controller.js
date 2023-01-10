@@ -1,6 +1,6 @@
 const axios = require('axios');
 const dotenv = require ('dotenv');
-const { getApiInfo, getDBinfo, getApiById, getDbById, getAlldiets, allInfo} = require ('./helpers')
+const { getApiInfo, getDBinfo, getApiById, getDbById, getAlldiets} = require ('./helpers')
 const {Sequelize} = require('sequelize');
 const { API_KEY } = process.env;
 dotenv.config();
@@ -25,10 +25,10 @@ const getAllRecipes = async (req, res) => {
  };
 const getForName = async (req, res) => {
     try {
-        const forName = await getAllRecipes();
+        const response = await getAllRecipes();
         const {name} = req.query;
-        const recipeName = await forName.filter(r => r.title.toLowerCase().includes(name.toLowerCase()))
-         return res.status(200).send(recipeName);
+        const SearchName = await response.filter(r => r.title.toLowerCase().includes(name.toLowerCase()))
+         return res.status(200).send(SearchName);
     } catch (error) {
      return res.status(400).send(error.message);   
     }};

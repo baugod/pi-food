@@ -6,10 +6,7 @@ import Home from './components/Home/home';
 //import Form from './components/Form/Form';
 //import Detail from './components/Detail/';
 import Navbar from './components/NavBar/NavBar';
-//import SearchBar from "./components/SearchBar/SearchBar";
-//import { useDispatch } from 'react-redux';
-//import { useEffect } from 'react';
-//import {allRecipesApi, allDietsApi} from "./Redux/petitionsApi"
+
 
 function App() {
   return (
