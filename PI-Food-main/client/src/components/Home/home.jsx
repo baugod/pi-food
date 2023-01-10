@@ -1,7 +1,5 @@
 import Cards from '../Cards/Cards';
-import Filter from '../FilterOptions/filter';
-import Sort from '../FilterOptions/sorts';
-import style from './homeStyle.css';
+import React from 'react';
 
 export default function Home(){
     return (

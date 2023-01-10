@@ -1,10 +1,9 @@
 console.clear();
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const dotenv = require("dotenv")
-const {diets} = require ("./src/controller/Typediets.controller")
+//const dotenv = require("dotenv")
+const {diets} = require ("./src/controller/Typediets.controller.js")
 const {TypeDiet} = require ("./src/db.js")
-dotenv.config()
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {

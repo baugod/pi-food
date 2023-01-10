@@ -31,6 +31,11 @@ const getDBinfo = async () => {
     }
   });
 };
+const AllInfo = async function(){
+  const dbinfo = await getDBinfo();
+  const apiinfo = await getApiInfo();
+  const allInfo = [...dbinfo,...apiinfo]
+  return allInfo; };
 
   const getApiById = async (id) => {
     const recipes = await getApiInfo();
@@ -48,10 +53,16 @@ const getDBinfo = async () => {
        } }
    });
  }
+  const getAlldiets = async () => {;
+    console.log("hola")
+   const diets = await TypeDiet.findAll();
+   return (diets);}
 
 module.exports = {
+    getAlldiets,
     getApiInfo,
     getDBinfo,
+    AllInfo,
     getApiById,
     getDbById,
    }
