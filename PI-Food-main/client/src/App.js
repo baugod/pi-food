@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react'
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import {LandingPage} from './components/LandingPage/LandingPage.jsx';
-import {Home} from './components/Home/home';
+import Home from './components/Home/home';
 //import Form from './components/Form/Form';
 //import Detail from './components/Detail/';
 import Navbar from './components/NavBar/NavBar';

@@ -31,17 +31,12 @@ const getDBinfo = async () => {
     }
   });
 };
-const AllInfo = async function(){
-  const dbinfo = await getDBinfo();
-  const apiinfo = await getApiInfo();
-  const allInfo = [...dbinfo,...apiinfo]
-  return allInfo; };
 
-  const getApiById = async (id) => {
-    const recipes = await getApiInfo();
-    const recipesId = await recipes.find((d) => d.id == id);
-    return recipesId;
-  };
+   const getApiById = async (id) => {
+     const recipes = await getApiInfo();
+     const recipesId = await recipes.find((d) => d.id == id);
+     return recipesId;
+   };
   
  const getDbById = async (id) => {
    return await Recipe.findByPk(id, {
@@ -62,7 +57,7 @@ module.exports = {
     getAlldiets,
     getApiInfo,
     getDBinfo,
-    AllInfo,
+    //AllInfo,
     getApiById,
     getDbById,
    }

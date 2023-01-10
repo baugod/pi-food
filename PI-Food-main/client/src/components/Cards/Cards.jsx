@@ -3,11 +3,11 @@
 
 
 
-import'./Recipes.css';
+import'./CardsStyle.css';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
-export function Cards() {
+export default function Cards() {
 const [recipes, setRecipes] = useState([]);
 
 useEffect(()=>{
