@@ -1,28 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './CardSyle.css'
+import { useNavigate } from "react-router-dom";
+import './CardStyle.css';
 
-export default function Card({id, title, image, diets}) {
-	const getDiets = function () {
-		let arrayDiets = [];
-		if (diets) {
-			for(let diet of diets) {
-				typeof diet === 'object' ? arrayDiets.push(diet.name) : arrayDiets.push(diet);
-			}
-		}
-		return arrayDiets.length ? arrayDiets.join(', ') : 'Diets Not Found!'
-	}
-	return (
-		<React.Fragment>
-			<Link to={`/recipes/${id}`} className='card'>
-				<div className='img-recipe'>
-					<img src={image || 'https://media.giphy.com/media/lGbz7CsaCj4Tm/giphy.gif'} alt={title}/>
-				</div>
-					<div className='card-info'>
-	                	<h2 className='card-title'>{title}</h2>
-						<h4 className='card-diets'>{getDiets()}</h4>
-					</div>
-			</Link>
-    	</React.Fragment>
-	)
+export function Card({recipe}){
+    const {title, typeDiet} = recipe;
+    const image = recipe.image;
+    const healthScore = recipe.healthScore;
+    
+    //const type = Array.isArray(typeDiet) ? typeDiet.slice(0,3).join() : typeDiet?.split(",").slice(0,3).join();
+
+    const navigate = useNavigate();
+    const click = () => {
+      navigate(`/details/${recipe.id}`);
+    };
+    return (
+        <div>
+            <div class="card">
+  <div class="card-details">
+    <p class="text-title">Card title</p>
+    <img src={image} alt={title} />
+    <p class="text-body">{healthScore}{typeDiet}</p>
+  </div>
+  <button class="card-button" onClick={recipe.id ? click : null}>Más información</button>
+</div>
+        </div>
+    )
 }
+

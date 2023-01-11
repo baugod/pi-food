@@ -1,6 +1,6 @@
-
+import "./CardsStyle.css"
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom"
 
 export function Recipes() {
   const [recipes, setRecipes] = useState([]);
@@ -31,14 +31,21 @@ const upPage = ()=>{
     getRecipes();
   }, [counter]);
 
+
   return (
-    <Link>
+    <div>
     <div>
       {recipes.map((r) => {
         return (
-          <div>
-            <p key={r.id}>{r.title}</p>
-            <img src={r.image} alt={r.title} />
+            <div className="container">
+          <div className="card">
+            <h1 key={r.id}>{r.title}</h1>
+            <img src={r.image}alt={"Imagen"}/>
+            <h4>{r.healthScore} </h4>
+            <Link to={`/recipes/${r.id}`}>
+            <button className="card-button" >Más Info</button>
+            </Link>
+          </div>
           </div>
         );
       })}
@@ -47,7 +54,7 @@ const upPage = ()=>{
       <span>{counter}</span>
       <button onClick={upPage}>+</button>
     </div>
-    </Link>
+    </div>
   );
 }
 

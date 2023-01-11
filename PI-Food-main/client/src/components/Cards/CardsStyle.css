@@ -1,70 +1,67 @@
-.container{
-    width: 100%;
-    margin: 0;
-    margin-top: 15px;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5em;
-    column-gap: 1em;
+.card {
+  width: 160px;
+  height: 250px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 2.2rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+ }
+ 
+ .card-details {
+  color: black;
+  height: 100%;
+  gap: .5em;
+  display: grid;
+  place-content: center;
+ }
+
+ .container{
+  width: 30%;
+  margin: 5px;
+  margin-top: 20px;
+  padding: 0px;
+  display:inline-block;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-
-.paginated {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 30px;
-    padding: 0;
-  }
-  .paginated li {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    height: 65px;
-    width: 40px;
-    cursor: pointer;
-    box-shadow: 0 8px 14px 0 rgba(0,0,0,0.3);
-    border: 1px solid var(--color-principal);
-    background-color: bisque;
-    color: black;
-  }
-
-
-.paginated .active {
-
-  background: var(--color-principal);
-  color: rgb(255, 255, 255);
-}
-
-.paginated p {
-  font-family: 'Sono';
-  font-size: 1.3rem;
+ 
+ .card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
+ 
+ .text-body {
+  color: rgb(134, 134, 134);
+ }
+ 
+ /*Text*/
+ .text-title {
+  font-size: 1.5em;
   font-weight: bold;
-}
-
-.disabled {
-  pointer-events: none;
-  color: rgba(0, 0, 0, 0.43);
-}
-.disabled:hover {
-  background-color: transprent;
-  cursor: default;
-}
-
-@media (max-width:400px) {
-  .paginated li{
-    width: 30px;
-    height: 50px;
-  }
-  .paginated p{
-    font-size: 1rem;
-  }
-}
+ }
+ 
+ /*Hover*/
+ .card:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+ }
+ 
+ .card:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+ }

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { sortByScore, sortByAsc} from '../../Redux/recipeSlice';
 import style from './filter.css';
-export default function Sort(){
+export function Sort(){
     const dispatch = useDispatch();
     function handleChangeSortAsc(e){
         dispatch(sortByAsc(e.target.value))

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByTypeDiet, filterByCreated} from "../../Redux/recipeSlice";
 import style from "./filter.css"
 
-export default function filter() {
+export  function Filter() {
     const{ typeDiet } = useSelector((state)=> state.recipes);
     const dispatch = useDispatch();
     const [filter, setFilter] = useState({typeDiets: "all", isDB: "all"});
