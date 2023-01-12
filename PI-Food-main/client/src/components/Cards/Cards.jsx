@@ -1,27 +1,35 @@
 import "./CardsStyle.css"
 import React, { useState } from "react";
 import {Card} from '../Card/Card';
-import Paginado from '../paginado/paginado';
+import Pagination from './pagination';
 import Loading from '../Loading/loading';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+//import { useEffect } from "react";
+//import {allRecipesApi} from "../../Redux/petitionsApi";
 
 export function Recipes() {
-  const state = useSelector((state)=> state.recipe);
-  console.log(state);
+  // const dispatch = useDispatch();
+
+  // useEffect(()=> {
+  //   allRecipesApi(dispatch);
+  // },[dispatch]);
+  const state = useSelector((state)=> state.recipe.recipefilter);
+  //console.log(state);
 
   const[currentPage, setCurrentPage] = useState(1);
   const[recipePerPage, setRecipePerPage] = useState(9);
   const indexOfLastRecipe = currentPage * recipePerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipePerPage;
 
-  const currentRecipe = state.recipeFilter?.slice(indexOfFirstRecipe, indexOfLastRecipe);
-  if(state.recipeFilter.length){
+  const currentRecipe = state?.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  console.log(currentRecipe)
+  if(!state.length){
     return <Loading/>;
   } else {
     return(
       <>
       <div>
-        <Paginado
+        <Pagination
           recipePerPage={recipePerPage}
           allRecipe={state.recipeFilter?.length}
           currentPage={currentPage}
@@ -29,11 +37,11 @@ export function Recipes() {
           /> 
       </div>
       <div className="">
-        {state.recipeFilter? currentRecipe.map((e)=> 
+        {state? currentRecipe.map((e)=> 
         <Card key={e.title} recipe={e}/>) : null}
       </div>
       <div>
-        <Paginado
+        <Pagination
           recipePerPage={recipePerPage}
           allRecipe={state.recipeFilter?.length}
           currentPage={currentPage || 1}

@@ -20,7 +20,7 @@ export function Card({recipe}){
           <h1 key={recipe.id}>{title}</h1>
           </div>
           <img className='recipeImg' src={image}alt={"Imagen"}/>
-          <h4>Dietas: {type} </h4>
+          <h4>Dietas:{type}</h4>
           
           <button className="card-button" onClick={recipe.id ? click : null}>Más Info</button>
           

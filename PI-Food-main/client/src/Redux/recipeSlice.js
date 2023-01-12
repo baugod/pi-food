@@ -8,12 +8,13 @@ const initialState = {
   error: false,
 };
 const recipeSlice = createSlice({
-  name: "Recipe",
+  name: "recipe",
   initialState,
   reducers: {
     getAllRecipes(state, action) {
       state.allRecipes = action.payload;
       state.recipefilter = action.payload;
+      //console.log(action.payload);
     },
   },
 });

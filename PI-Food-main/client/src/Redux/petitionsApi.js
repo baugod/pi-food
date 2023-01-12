@@ -6,6 +6,7 @@ export async function allRecipesApi(dispatch) {
     try {
         const petition = await axios.get('/recipes');
         dispatch(getAllRecipes(petition?.data));
+        //console.log(petition.data);
         return;
     } catch (error){
         return error.response;
