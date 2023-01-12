@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import {byNameApi} from "../../Redux/petitionsApi"
 import style from "./search.css";
-import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import swal from "sweetalert2";
+//import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function SearchBard() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [input, SetInput] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();

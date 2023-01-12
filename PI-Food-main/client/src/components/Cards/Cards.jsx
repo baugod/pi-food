@@ -1,96 +1,46 @@
 import "./CardsStyle.css"
-import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import {Card} from '../Card/Card';
+import Paginado from '../paginado/paginado';
+import Loading from '../Loading/loading';
+import {useSelector} from 'react-redux'
 
 export function Recipes() {
-  const [recipes, setRecipes] = useState([]);
-  const [counter, setCounter] = useState(1);
+  const state = useSelector((state)=> state.recipe);
+  console.log(state);
 
-const downPage = () =>{
-    setCounter(counter - 1);
+  const[currentPage, setCurrentPage] = useState(1);
+  const[recipePerPage, setRecipePerPage] = useState(9);
+  const indexOfLastRecipe = currentPage * recipePerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipePerPage;
+
+  const currentRecipe = state.recipeFilter?.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  if(state.recipeFilter.length){
+    return <Loading/>;
+  } else {
+    return(
+      <>
+      <div>
+        <Paginado
+          recipePerPage={recipePerPage}
+          allRecipe={state.recipeFilter?.length}
+          currentPage={currentPage}
+          paginado={setCurrentPage}
+          /> 
+      </div>
+      <div className="">
+        {state.recipeFilter? currentRecipe.map((e)=> 
+        <Card key={e.title} recipe={e}/>) : null}
+      </div>
+      <div>
+        <Paginado
+          recipePerPage={recipePerPage}
+          allRecipe={state.recipeFilter?.length}
+          currentPage={currentPage || 1}
+          paginado={setCurrentPage}
+          /> 
+      </div>
+      </>
+    )
+  }
 }
-const upPage = ()=>{
-    setCounter(counter + 1);
-}
-  useEffect(() => {
-    const getRecipes = async () => {
-      try {
-        const recipe = await fetch("http://localhost:3001/recipes");
-        const data = await recipe.json();
-        if(counter === 1){
-          const aux = data.splice(0,9);
-          return setRecipes(aux);
-        }else{
-        const aux = data.splice(counter*10-10, counter*10-1)
-        return setRecipes(aux)
-        }
-      } catch (error) {
-        return error.message;
-      }
-    };
-    getRecipes();
-  }, [counter]);
-
-
-  return (
-    <div>
-    <div>
-      {recipes.map((r) => {
-        return (
-            <div className="container">
-          <div className="card">
-            <h1 key={r.id}>{r.title}</h1>
-            <img src={r.image}alt={"Imagen"}/>
-            <h4>{r.healthScore} </h4>
-            <Link to={`/recipes/${r.id}`}>
-            <button className="card-button" >Más Info</button>
-            </Link>
-          </div>
-          </div>
-        );
-      })}
-
-      <button onClick={downPage}>-</button>
-      <span>{counter}</span>
-      <button onClick={upPage}>+</button>
-    </div>
-    </div>
-  );
-}
-
-
-
-
-
-
-// export default function Cards(){
-//     const state = useSelector((state) => state.recipe);
-
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const [recipesPerPage, setRecipesPerPage] = useState(10);
-//     const indexOfLastRecipe = currentPage * recipesPerPage;
-//     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-
-//     const currentRecipes = state.recipesFilter?.slice(indexOfFirstRecipe, indexOfLastRecipe);
-
-//     if(!state.recipesFilter.length){
-//         return <Loading/>;
-//     } else {
-//         return (
-//             <>
-//             <div>
-//                <Pagination
-//                 recipesPerPage = {recipesPerPage}
-//                 allRecipes = {state.recipesFilter?.length}
-//                 currentPage = {currentPage}
-//                 paginado = {setCurrentPage}
-//             />
-//             </div>
-//             <div className="">
-//                 {state.recipesFilter ? currentRecipes.map((e) => <Card key={e.name} recipe={e}/>)
-//             : null }
-//             </div>
-//           </>
-//         );
-//     }
-// }
