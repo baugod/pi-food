@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByTypeDiet, filterByCreated} from "../../Redux/recipeSlice";
+import { filterByCreated, filterByDiets} from "../../Redux/recipeSlice";
 import style from "./filter.css"
 
 export  function Filter() {
-    const{ typeDiet } = useSelector((state)=> state.recipes);
+    const{diet} = useSelector((state)=> state.recipes);
+    console.log("HOlaaa");
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState({typeDiets: "all", isDB: "all"});
-    var typeDiets = filter.typeDiet;
+    const [filter, setFilter] = useState({diets: "all", isDB: "all"});
+    var diets = filter.diets;
     var isDB = filter.isDB;
 
     function handleChangeFilter(e){
-        typeDiets = e.target.value;
+        diets = e.target.value;
         setFilter({...filter, isDB:e.target.value});
     }
     function hamdleChangeFilterDB(e) {
@@ -19,15 +20,15 @@ export  function Filter() {
         setFilter({...filter, isDB: e.target.value});
     }
     function handleChangeForm(){
-        dispatch(filterByTypeDiet(typeDiets));
-        dispatch(filterByTypeDiet);
+        dispatch(filterByDiets(diets));
+        dispatch(filterByDiets);
     }
     function clearFilter(){
         setFilter({
-            typeDiet:"all",
+            diets:"all",
             isDB:"all"
         });
-        dispatch(filterByTypeDiet("all"));
+        dispatch(filterByDiets("all"));
         dispatch(filterByCreated("all"));
     }
 
@@ -40,7 +41,7 @@ export  function Filter() {
               <select 
               className={style.select}
               onChange={handleChangeFilter}
-              value= {typeDiets}
+              value= {diets}
               >
               <option disable selected value="all">
                 Filter by type diet
@@ -48,7 +49,7 @@ export  function Filter() {
               <option value="all">
                 All
               </option>
-              {typeDiet.map((e)=> (
+              {diets.map((e)=> (
                 <option value={e} key={e}> {e} </option>
               ))}
               </select>

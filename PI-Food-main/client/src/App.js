@@ -6,6 +6,7 @@ import Home from './components/Home/home';
 import Navbar from './components/NavBar/NavBar';
 import { useDispatch } from 'react-redux';
 import {allRecipesApi} from "./Redux/petitionsApi.js"
+import Details from './components/Detail/detail'
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function App() {
           <Route path= '/' element= {<LandingPage/>}/>
           <Route path= '/Home' element= {<Home/>}/>
           {/* <Route path= '/Recipe' element= {<Form/>}/> */}
-          {/* <Route path= '/Detail' component= {<Detail/>}/> */}
+          <Route path= '/details/:id' element= {<Details/>}/> 
       </Routes>
           <Navbar/>
     </div>

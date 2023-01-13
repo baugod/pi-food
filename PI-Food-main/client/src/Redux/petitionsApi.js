@@ -12,3 +12,13 @@ export async function allRecipesApi(dispatch) {
         return error.response;
     }
 }
+export async function allDiets(dispatch) {
+    const peticion = await axios.get(`/diets`);
+    dispatch(getAllRecipes(peticion?.data));
+    return;
+  }
+  export async function apiAllbyname(dispatch, name) {
+    const peticion = await axios.get(`/recipes?name=${name}`);
+    dispatch(getAllRecipes(peticion?.data));
+    return;
+  }

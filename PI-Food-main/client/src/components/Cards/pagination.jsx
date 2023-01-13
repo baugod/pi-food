@@ -4,7 +4,7 @@ import {
   RightArrow,
   DoubleLeftArrow,
   DoubleRightArrow,
-} from "./pagesArrows";
+} from "./pagesArrows.jsx";
 
 
 export default function Pagination({
