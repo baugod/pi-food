@@ -1,8 +1,7 @@
 import "./CardsStyle.css"
 import React, { useState } from "react";
 import {Card} from '../Card/Card';
-import Pagination from './pagination';
-import Loading from '../Loading/loading';
+import LoaderFood from '../Loading/loading';
 import {useSelector, useDispatch} from 'react-redux';
 //import { useEffect } from "react";
 //import {allRecipesApi} from "../../Redux/petitionsApi";
@@ -17,36 +16,35 @@ export function Recipes() {
   //console.log(state);
 
   const[currentPage, setCurrentPage] = useState(1);
-  const[recipePerPage, setRecipePerPage] = useState(9);
-  const indexOfLastRecipe = currentPage * recipePerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipePerPage;
+ 
 
-  const currentRecipe = state?.slice(indexOfFirstRecipe, indexOfLastRecipe);
-  console.log(currentRecipe)
+  const currentRecipe = state?.slice(currentPage, currentPage +9);
+  
+  const nextPage= () => {
+    setCurrentPage(currentPage +9);
+  }
+  const prevPage= () => {
+    if(currentPage > 1)
+   setCurrentPage( currentPage +9)
+  }
+
   if(!state.length){
-    return <Loading/>;
+    return <LoaderFood/>;
   } else {
     return(
       <>
       <div>
-        <Pagination
-          recipePerPage={recipePerPage}
-          allRecipe={state.recipeFilter?.length}
-          currentPage={currentPage}
-          paginado={setCurrentPage}
-          /> 
+       <button onClick={prevPage}>Anterior</button>
+       <button onClick={nextPage}>Siguiente</button>
       </div>
+      <hr/>
       <div className="">
         {state? currentRecipe.map((e)=> 
         <Card key={e.title} recipe={e}/>) : null}
       </div>
       <div>
-        <Pagination
-          recipePerPage={recipePerPage}
-          allRecipe={state.recipeFilter?.length}
-          currentPage={currentPage || 1}
-          paginado={setCurrentPage}
-          /> 
+       <button onClick={nextPage}>Anterior</button>
+       <button onClick={prevPage}>Siguiente</button>
       </div>
       </>
     )

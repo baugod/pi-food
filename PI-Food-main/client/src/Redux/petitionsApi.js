@@ -22,3 +22,13 @@ export async function allDiets(dispatch) {
     dispatch(getAllRecipes(peticion?.data));
     return;
   }
+  export async function apiPostRecipe(newRecipe) {
+    return await axios.post("/recipe", {
+      ...newRecipe,
+      title: newRecipe.title,
+      image: newRecipe.image,
+      summary: newRecipe.summary,
+      healthScore :newRecipe.healthScore,
+      diets : newRecipe.diets,
+      analyzedInstructions: newRecipe.analyzedInstructions,
+    })};

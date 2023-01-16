@@ -29,9 +29,9 @@ export default function SearchBard() {
         id="title"
         className={style.Bar}
         onChange={handleChange}
-        placeholder="Buscar Receta"
+        placeholder="Search Recipe"
       />
-      <button onSubmit={handleSubmit}>Buscar</button>
+      <button onSubmit={handleSubmit}>Search</button>
     </form>
   );
 }

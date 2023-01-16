@@ -2,13 +2,16 @@
   width: 300px;
   height: 250px;
   border-radius: 20px;
-  background: #f5f5f5;
+  background-color: #df3939;
   position: relative;
   margin-top: 60px;
   padding: 3.2rem;
   border: 2px solid #c3c6ce;
   transition: 0.5s ease-out;
   overflow: visible;
+  align-content: center;
+  justify-content: center;
+  margin:70px auto;
  }
  
  .card-details {

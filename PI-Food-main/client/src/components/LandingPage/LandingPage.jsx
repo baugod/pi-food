@@ -8,7 +8,7 @@ export function LandingPage(){
         
             <h1 className="wlc">Bienvenidos a las Recetas de Bauti!</h1>
             <Link to= '/home'> 
-            <button className="btn">A COCINAR!!</button>
+            <button className="btn">To cocking!!</button>
             </Link>
         </div>
     )
