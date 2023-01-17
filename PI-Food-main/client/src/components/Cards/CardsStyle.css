@@ -1,36 +1,13 @@
 .card {
-  width: 300px;
-  height: 250px;
-  border-radius: 20px;
-  background-color: #df3939;
-  position: relative;
-  margin-top: 60px;
-  padding: 3.2rem;
-  border: 2px solid #c3c6ce;
-  transition: 0.5s ease-out;
-  overflow: visible;
-  align-content: center;
-  justify-content: center;
-  margin:70px auto;
+
  }
  
  .card-details {
-  color: black;
-  height: 100%;
-  gap: .5em;
-  display: grid;
-  place-content: center;
+
  }
 
  .container{
-  width: 30%;
-  margin: 10px;
-  margin-top: 20px;
-  padding: 0px;
-  display:inline-block;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+ 
 }
 .recipeImg {    
   display: flex;
@@ -81,4 +58,16 @@
  .card:hover .card-button {
   transform: translate(-50%, 50%);
   opacity: 1;
+ }
+
+ .button-pag { 
+  margin:8px;
+  height:40px;
+  width:50px;
+  color:white;
+  background-color:black;
+ }
+ .pagination {
+  justify-content:center;
+  display:flex;
  }

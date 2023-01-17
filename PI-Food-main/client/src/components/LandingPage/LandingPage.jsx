@@ -6,7 +6,7 @@ export function LandingPage(){
     return (
         <div className = "landing">
         
-            <h1 className="wlc">Bienvenidos a las Recetas de Bauti!</h1>
+            <h1 className="wlc">Welcome!</h1>
             <Link to= '/home'> 
             <button className="btn">To cocking!!</button>
             </Link>

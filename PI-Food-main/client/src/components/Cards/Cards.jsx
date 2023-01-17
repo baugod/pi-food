@@ -2,49 +2,37 @@ import "./CardsStyle.css"
 import React, { useState } from "react";
 import {Card} from '../Card/Card';
 import LoaderFood from '../Loading/loading';
-import {useSelector, useDispatch} from 'react-redux';
-//import { useEffect } from "react";
-//import {allRecipesApi} from "../../Redux/petitionsApi";
+import {useSelector} from 'react-redux';
+import Pagination from "./Pagination"
 
 export function Recipes() {
-  // const dispatch = useDispatch();
-
-  // useEffect(()=> {
-  //   allRecipesApi(dispatch);
-  // },[dispatch]);
-  const state = useSelector((state)=> state.recipe.recipefilter);
-  //console.log(state);
-
-  const[currentPage, setCurrentPage] = useState(1);
- 
-
-  const currentRecipe = state?.slice(currentPage, currentPage +9);
   
-  const nextPage= () => {
-    setCurrentPage(currentPage +9);
-  }
-  const prevPage= () => {
-    if(currentPage > 1)
-   setCurrentPage( currentPage +9)
-  }
+  const state = useSelector((state)=> state.recipe.recipefilter);
+  
+
+  const [pagina,setPagina ] = useState(1);
+  const [porPagina,setPorPagina ] = useState(9);
+ 
+  const max = state.length/ porPagina;
+  
+
 
   if(!state.length){
     return <LoaderFood/>;
   } else {
     return(
       <>
+      <br>
+      </br>
       <div>
-       <button onClick={prevPage}>Anterior</button>
-       <button onClick={nextPage}>Siguiente</button>
+      <Pagination pagina={pagina} setPagina={setPagina} max={max}/>
       </div>
-      <hr/>
       <div className="">
-        {state? currentRecipe.map((e)=> 
-        <Card key={e.title} recipe={e}/>) : null}
+        {state?.slice((pagina-1)*porPagina,(pagina-1)*porPagina+porPagina).map((e) =>
+        <Card key={e.title} recipe={e}/>) }
       </div>
       <div>
-       <button onClick={nextPage}>Anterior</button>
-       <button onClick={prevPage}>Siguiente</button>
+      <Pagination pagina={pagina} setPagina={setPagina} max={max}/>
       </div>
       </>
     )

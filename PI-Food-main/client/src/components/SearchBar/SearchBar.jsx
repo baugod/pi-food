@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { apiAllbyname } from "../../Redux/petitionsApi";
-import style from "./search.css";
+import "./search.css";
 import swal from "sweetalert2";
 import { useState } from "react";
 
@@ -23,15 +23,15 @@ export default function SearchBard() {
    // apiAllbyname(dispatch, e.target.value);
   };
   return (
-    <form className={style.form}>
+    <form className="form">
       <input
         type="text"
         id="title"
-        className={style.Bar}
+        className="Bar"
         onChange={handleChange}
         placeholder="Search Recipe"
       />
-      <button onSubmit={handleSubmit}>Search</button>
+      <button className="button" onSubmit={handleSubmit}>Search</button>
     </form>
   );
 }

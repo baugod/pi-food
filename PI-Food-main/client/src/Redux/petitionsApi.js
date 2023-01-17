@@ -1,5 +1,5 @@
 import axios from "./axios.js";
-import { getAllRecipes } from "./recipeSlice.js";
+import { getAllRecipes, getRecipeById } from "./recipeSlice.js";
 
 
 export async function allRecipesApi(dispatch) {
@@ -18,12 +18,24 @@ export async function allDiets(dispatch) {
     return;
   }
   export async function apiAllbyname(dispatch, name) {
-    const peticion = await axios.get(`/recipes?name=${name}`);
+    const peticion = await axios.get(`/name=${name}`);
     dispatch(getAllRecipes(peticion?.data));
     return;
   }
+
+  export async function apiRecipeById(dispatch, id) {
+    try {
+      const peticion = await axios.get(`/recipes/${id}`);
+      console.log(peticion.data);
+      dispatch(getRecipeById(peticion?.data));
+      return;
+    } catch (error) {
+      return error.response;
+    }
+  }
+  
   export async function apiPostRecipe(newRecipe) {
-    return await axios.post("/recipe", {
+    return await axios.post("/Recipe", {
       ...newRecipe,
       title: newRecipe.title,
       image: newRecipe.image,
@@ -32,3 +44,4 @@ export async function allDiets(dispatch) {
       diets : newRecipe.diets,
       analyzedInstructions: newRecipe.analyzedInstructions,
     })};
+

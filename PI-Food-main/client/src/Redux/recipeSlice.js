@@ -19,6 +19,9 @@ const recipeSlice = createSlice({
     getAllDiets(state, action){
       state.diets = action.payload;
     },
+    getRecipeById(state, action){
+      state.countryId= action.payload
+    },
     filterByDiets(state, {payload}){
       const allRecipes = state.allRecipes;
       const filter = payload === 'all' ? state.allRecipes : allRecipes.filter(el => {
@@ -49,5 +52,5 @@ const recipeSlice = createSlice({
   },
 });
 
-export const { getAllRecipes, getAllDiets, filterByCreated, filterByDiets, sortByAsc } = recipeSlice.actions;
+export const { getAllRecipes, getAllDiets, filterByCreated, filterByDiets, sortByAsc, getRecipeById } = recipeSlice.actions;
 export const recipeRed = recipeSlice.reducer;

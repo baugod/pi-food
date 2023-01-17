@@ -10,7 +10,7 @@ export function Card({recipe}){
 
     const navigate = useNavigate();
     const click = () => {
-      navigate(`/details/${recipe.id}`);
+      navigate(`/recipes/${recipe.id}`);
     };
     return (
         <div className="container">
